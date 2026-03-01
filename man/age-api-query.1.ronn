@@ -1,0 +1,71 @@
+# age-api-query(1) -- Age bracket query tool
+
+<!--
+# Copyright (C) 2027 - 2027 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+# See the file COPYING for copying conditions.
+-->
+
+## SYNOPSIS
+
+`age-api-query`
+
+## DESCRIPTION
+
+Reads the locally stored age bracket and prints:
+
+* a machine-readable age bracket number to standard output (stdout)
+* a human-readable age bracket description to standard error (stderr)
+
+This separation allows scripting with stdout while still providing a helpful
+explanation for interactive use.
+
+The age bracket is expected to be stored as an integer in the file
+`~/.age-api/age-bracket`.
+
+Bracket mapping:
+
+* 1: Under 13
+* 2: 13 to under 16
+* 3: 16 to under 18
+* 4: 18 or older
+
+## OPTIONS
+
+None.
+
+## CONFIG FILE
+
+* `/etc/age-api.d/*.conf`
+* `/usr/local/etc/age-api.d/*.conf`
+
+## FILES
+
+* `~/.age-api/age-bracket`
+
+## EXIT CODES
+
+0 Success.
+
+1 Internal error or invalid bracket value (expected 1-4).
+
+## EXAMPLES
+
+Machine-readable usage (recommended for scripts):
+
+`age-api-query`
+
+Suppress human-readable output:
+
+`age-api-query 2>/dev/null`
+
+Use the numeric bracket in a shell script:
+
+`age_bracket="$(age-api-query 2>/dev/null)"`
+
+## WWW
+
+https://www.kicksecure.com/wiki/age-api
+
+## AUTHOR
+
+This man page has been written by Patrick Schleizer (adrelanos@whonix.org).
