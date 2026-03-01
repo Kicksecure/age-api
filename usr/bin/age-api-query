@@ -1,9 +1,11 @@
 #!/bin/bash
 
-## Copyright (C) 2027 - 2027 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## Copyright (C) 2026 - 2026 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-## age-api-query: print age bracket number to stdout, human-readable bracket to stderr
+## age-api-query: print age bracket number to stdout (machine-readable),
+##                and a human-readable description to stderr.
+## Exit code zero on success. Otherwise non-zero.
 
 set -o errexit
 set -o nounset
@@ -20,13 +22,13 @@ parse_configuration() {
     bash -n "$i"
     source "$i"
   done
-  BRACKET_FILE=~/.age-api/age-bracket
+
+  BRACKET_FILE="${HOME}/.age-api/age-bracket"
+
   age_bracket="$(read_integer_file "$BRACKET_FILE")"
 }
 
 parse_configuration
-
-printf '%s\n' "age bracket (human readable):" >&2
 
 case "$age_bracket" in
   1) human="Under 13" ;;
@@ -39,8 +41,8 @@ case "$age_bracket" in
     ;;
 esac
 
-printf '%s\n' "$human"
+## Human-readable output to stderr for interactive use/logging.
+printf 'Age bracket: %s\n' "$human" >&2
 
-printf '%s\n' "age bracket (machine readable):" >&2
-
+## Machine-readable output to stdout for scripts.
 printf '%s\n' "$age_bracket"
