@@ -1,0 +1,61 @@
+.\" generated with Ronn-NG/v0.10.1
+.\" http://github.com/apjanke/ronn-ng/tree/0.10.1
+.TH "AGE\-API\-QUERY" "1" "January 2020" "age-api" "age-api Manual"
+.SH "NAME"
+\fBage\-api\-query\fR \- Age bracket query tool
+.SH "SYNOPSIS"
+\fBage\-api\-query\fR
+.SH "DESCRIPTION"
+Reads the locally stored age bracket and prints:
+.IP "\(bu" 4
+a machine\-readable age bracket number to standard output (stdout)
+.IP "\(bu" 4
+a human\-readable age bracket description to standard error (stderr)
+.IP "" 0
+.P
+This separation allows scripting with stdout while still providing a helpful explanation for interactive use\.
+.P
+The age bracket is expected to be stored as an integer in the file \fB~/\.age\-api/age\-bracket\fR\.
+.P
+Bracket mapping:
+.IP "\(bu" 4
+1: Under 13
+.IP "\(bu" 4
+2: 13 to under 16
+.IP "\(bu" 4
+3: 16 to under 18
+.IP "\(bu" 4
+4: 18 or older
+.IP "" 0
+.SH "OPTIONS"
+None\.
+.SH "CONFIG FILE"
+.IP "\(bu" 4
+\fB/etc/age\-api\.d/*\.conf\fR
+.IP "\(bu" 4
+\fB/usr/local/etc/age\-api\.d/*\.conf\fR
+.IP "" 0
+.SH "FILES"
+.IP "\(bu" 4
+\fB~/\.age\-api/age\-bracket\fR
+.IP "" 0
+.SH "EXIT CODES"
+0 Success\.
+.P
+1 Internal error or invalid bracket value (expected 1\-4)\.
+.SH "EXAMPLES"
+Machine\-readable usage (recommended for scripts):
+.P
+\fBage\-api\-query\fR
+.P
+Suppress human\-readable output:
+.P
+\fBage\-api\-query 2>/dev/null\fR
+.P
+Use the numeric bracket in a shell script:
+.P
+\fBage_bracket="$(age\-api\-query 2>/dev/null)"\fR
+.SH "WWW"
+https://www\.kicksecure\.com/wiki/age\-api
+.SH "AUTHOR"
+This man page has been written by Patrick Schleizer (adrelanos@whonix\.org)\.
