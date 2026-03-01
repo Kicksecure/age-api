@@ -1,4 +1,25 @@
 #!/bin/bash
 
-stub
+## Copyright (C) 2027 - 2027 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
 
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+parse_configuration() {
+   shopt -s nullglob
+   local i
+   for i in /etc/age-api.d/*.conf /usr/local/etc/age-api.d/*.conf; do
+      bash -n "$i"
+      source "$i"
+   done
+
+   bash -n "~/.age-api/age-bracket.conf"
+   source "~/.age-api/age-bracket.conf"
+fi
+
+parse_configuration
+
+printf '%s\n' "$age_bracket"
