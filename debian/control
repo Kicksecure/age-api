@@ -1,4 +1,4 @@
-## Copyright (C) 2012 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
+## Copyright (C) 2026 - 2026 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
 Source: age-api
@@ -14,8 +14,12 @@ Rules-Requires-Root: no
 
 Package: age-api
 Architecture: all
-Depends: ${misc:Depends}
-Description: todo
- todo
+Depends: ${misc:Depends}, helper-scripts
+Description: Local age bracket storage and query helper (age signaling)
+ age-api provides a minimal local mechanism to store an age bracket and query it
+ for age-signaling use cases.
+ .
+ The age-api-query tool outputs a machine-readable
+ age bracket number on stdout and a human-readable description on stderr.
  .
  See also: https://www.kicksecure.com/wiki/age-api
