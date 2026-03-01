@@ -3,10 +3,15 @@
 ## Copyright (C) 2027 - 2027 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+## age-api-query: print age bracket number to stdout, human-readable bracket to stderr
+
 set -o errexit
 set -o nounset
 set -o errtrace
 set -o pipefail
+
+## provides: read_integer_file
+source /usr/libexec/helper-scripts/strings.bsh
 
 parse_configuration() {
   shopt -s nullglob
@@ -15,14 +20,27 @@ parse_configuration() {
     bash -n "$i"
     source "$i"
   done
-
-  api_file_local="~/.age-api/age-bracket.conf"
-  if test -f "$api_file_local"; then
-    bash -n "$api_file_local"
-    source "$api_file_local"
-  fi
+  BRACKET_FILE=~/.age-api/age-bracket
+  age_bracket="$(read_integer_file "$BRACKET_FILE")"
 }
 
 parse_configuration
+
+printf '%s\n' "age bracket (human readable):" >&2
+
+case "$age_bracket" in
+  1) human="Under 13" ;;
+  2) human="13 to under 16" ;;
+  3) human="16 to under 18" ;;
+  4) human="18 or older" ;;
+  *)
+    printf "age-api-query: invalid bracket '%s' in %s (expected 1-4)\n" "$age_bracket" "$BRACKET_FILE" >&2
+    exit 1
+    ;;
+esac
+
+printf '%s\n' "$human"
+
+printf '%s\n' "age bracket (machine readable):" >&2
 
 printf '%s\n' "$age_bracket"
