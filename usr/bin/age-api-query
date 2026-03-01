@@ -9,16 +9,19 @@ set -o errtrace
 set -o pipefail
 
 parse_configuration() {
-   shopt -s nullglob
-   local i
-   for i in /etc/age-api.d/*.conf /usr/local/etc/age-api.d/*.conf; do
-      bash -n "$i"
-      source "$i"
-   done
+  shopt -s nullglob
+  local i
+  for i in /etc/age-api.d/*.conf /usr/local/etc/age-api.d/*.conf; do
+    bash -n "$i"
+    source "$i"
+  done
 
-   bash -n "~/.age-api/age-bracket.conf"
-   source "~/.age-api/age-bracket.conf"
-fi
+  api_file_local="~/.age-api/age-bracket.conf"
+  if test -f "$api_file_local"; then
+    bash -n "$api_file_local"
+    source "$api_file_local"
+  fi
+}
 
 parse_configuration
 
