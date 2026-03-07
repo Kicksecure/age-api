@@ -16,10 +16,18 @@ Package: age-api
 Architecture: all
 Depends: ${misc:Depends}, helper-scripts
 Description: Local age bracket storage and query helper (age signaling)
+ DRAFT: Nothing has been decided yet. Much better places to get further
+ information:
+ * https://www.kicksecure.com/wiki/age-api
+ * https://forums.whonix.org/t/whonix-adding-age-verification/22969
+ .
  age-api provides a minimal local mechanism to store an age bracket and query it
  for age-signaling use cases.
  .
  The age-api-query tool outputs a machine-readable
  age bracket number on stdout and a human-readable description on stderr.
+ .
+ DRAFT: Final implementation - if any - would look much different from what
+ is currently implemented.
  .
  See also: https://www.kicksecure.com/wiki/age-api
